@@ -1,7 +1,7 @@
 package trial;
 import java.util.*;
 
-
+//solution should exclude main and class be renamed as Solution
 class Problem4 {
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         
