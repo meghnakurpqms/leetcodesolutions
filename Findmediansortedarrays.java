@@ -1,7 +1,10 @@
-package trial;
+//package trial;
 import java.util.*;
 
+//solution beats 100% users in runtime and 92.04% users in memory usage
+
 //solution should exclude main and class be renamed as Solution
+
 class Problem4 {
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         
@@ -52,6 +55,9 @@ class Problem4 {
         return med;
         
     }
+    
+    
+    //exclude main
     public static void main(String args[])
     {
     	Scanner sc= new Scanner(System.in);
