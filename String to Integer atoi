@@ -1,0 +1,176 @@
+class Solution {
+    public int myAtoi(String str) {
+        int l=str.length();
+        String nstr="";int isneg=1; int negcount=0;int isdig=0;int isplus=0;int isminus=0;
+        for(int i=0;i<l;i++)
+        {
+            if(Character.isDigit(str.charAt(i)))
+                isdig=1;
+            if(str.charAt(i)=='+')
+                isplus=1;
+            if(str.charAt(i)=='-')
+                isminus=1;
+            System.out.println("i:"+i+" x:"+str.charAt(i));
+            if(Character.isDigit(str.charAt(i)) && i!=0 && str.charAt(i-1)==' ')
+            {
+                System.out.println("here");
+                if((isplus==1)||(isminus==1))
+                 return 0;
+            }
+               
+            if(Character.isLetter(str.charAt(i)) && isdig==0)
+               return 0;
+            if(Character.isLetter(str.charAt(i)) && isdig==1)
+               break;
+            if(str.charAt(i)==' ' && isdig==1)
+                break;
+            if(str.charAt(i)=='+')
+            {
+                if(l>1)
+                {
+                    if(i!=l-1)
+                    {
+                        if(str.charAt(i+1)=='-'||str.charAt(i+1)=='+')
+                            return 0;
+                    }
+                    if(i!=0)
+                    {
+                        if(str.charAt(i-1)=='-')
+                            return 0;
+                    }
+                }
+            }
+            //for "-"
+            if(str.charAt(i)=='-')
+               {
+                   negcount++;
+                   if(i!=l-1 && str.charAt(i+1)=='-')
+                   {System.out.println("1");
+                       return 0;
+                }
+                if(i==0 && str.length()==1)
+                    isneg=-1;
+                  else{
+                      if((i==0 && !(Character.isDigit(str.charAt(i+1))))||(i<l-1) && !(Character.isDigit(str.charAt(i+1))))
+                          return 0;
+                      if(i==0 && Character.isDigit(str.charAt(i+1)))
+                   { isneg=-1;
+                System.out.println("2");}
+                  }
+                   if(i==(l-1) && negcount==1)
+                   { isneg=0;
+                    System.out.println("3");
+                   }
+                   if((i!=(l-1) && i!=0) ){
+                       if(Character.isDigit(str.charAt(i-1))||Character.isDigit(str.charAt(i+1)))
+                       isneg=-1;
+                       System.out.println("4");
+                   }
+               }//minus
+            
+            
+               if(Character.isDigit(str.charAt(i)))
+                nstr+=str.charAt(i);
+                if(Character.isDigit(str.charAt(i)) && l>1 && i<l-1)
+                {
+                    if(!Character.isDigit(str.charAt(i+1)))
+                    {   
+                        //return isneg*Integer.parseInt(nstr);
+                        try{
+               return isneg*Integer.parseInt(nstr);
+             }
+              catch(Exception e)
+              {
+                  if(isneg==1)
+                      return Integer.MAX_VALUE;
+                  else return Integer.MIN_VALUE;
+              }
+                    }
+                }
+            //for .
+               if(str.charAt(i)=='.')
+               {
+                   if(i==0||str.charAt(i-1)=='0'||str.charAt(i-1)=='-'||str.charAt(i-1)=='+')
+                       return 0;
+                   if(str.charAt(i-1)>0||nstr.charAt(i-1)<0)
+                   {
+                        try{
+               int rev=isneg*Integer.parseInt(nstr);
+             }
+              catch(Exception e)
+              {
+                  if(isneg==1)
+                      return Integer.MAX_VALUE;
+                  else return Integer.MIN_VALUE;
+              } int rev=0;
+            if (rev > Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 ) )
+                  {
+                if(l-1-i==1)
+                {
+                   if(str.charAt(i+1)>='7')
+                       return Integer.MAX_VALUE;
+                     
+                }
+                else return Integer.MAX_VALUE;
+            }
+            if (rev < Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10))
+                 {
+                if(l-1-i==1)
+                {
+                   if(str.charAt(i+1)>='8')
+                       return Integer.MIN_VALUE;
+                       
+                }
+                else return Integer.MIN_VALUE;
+            }
+                
+             
+                 break;
+                   }
+                       
+               }
+             if(!(nstr.equals("")))
+             { try{
+               int rev=isneg*Integer.parseInt(nstr);
+             }
+              catch(Exception e)
+              {
+                  if(isneg==1)
+                      return Integer.MAX_VALUE;
+                  else return Integer.MIN_VALUE;
+              } int rev=0;
+                 System.out.println("rev:"+rev);
+            if (rev > Integer.MAX_VALUE )//|| (rev == Integer.MAX_VALUE / 10 ) )
+            {
+               /* if(l-1-i==1)
+                {
+                   if(str.charAt(i+1)>='7')
+                       return Integer.MAX_VALUE;
+                       
+                }
+                else */return Integer.MAX_VALUE;
+            }
+            if (rev <Integer.MIN_VALUE)///10 || (rev == Integer.MIN_VALUE / 10))
+            {
+                //System.out.println("here");
+                return Integer.MIN_VALUE;  
+               /* if(l-i-1==1)
+                {
+                   if(str.charAt(i+1)>='8')
+                       return Integer.MIN_VALUE;
+                       
+                }
+                else */
+                
+            }
+               
+               }
+            
+        }
+        if(nstr.equals(""))
+            return 0;
+        if(isneg==-1)
+            return -1*Integer.parseInt(nstr);
+        else return Integer.parseInt(nstr);
+        }
+    }
