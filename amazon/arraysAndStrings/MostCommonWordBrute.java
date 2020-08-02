@@ -20,24 +20,6 @@ class Solution {
                     System.out.println("word:"+word+" | map.get:"+map.get(word));
             }
         }
-//         for(String word:words)
-//         {
-//             if(!ban.contains(word)){
-//                 if(!map.containsKey(word))
-//                 {
-                    
-//                     map.put(word,1);
-//                     System.out.println("word:"+word +" count:"+map.get(word));
-                    
-//                 }
-//                 else
-//                 {
-//                     map.put(word,map.get(word)+1);
-//                      System.out.println("word:"+word +" count:"+map.get(word));
-//                 }
-//             }
-        
-//         }
          for(String word:words)
          {
             if(!ban.contains(word)){
